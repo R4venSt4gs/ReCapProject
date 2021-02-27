@@ -21,6 +21,24 @@ namespace Business.Contants
         public static string ColorDeleted = "Renk silindi";
         public static string ColorNameInvalid = "Renk ismi geçersiz";
         public static string ColorListed = "Renkler listelendi";
+        public static string RentalAdded = "Kiralama bilgileri sisteme eklendi";
+        public static string RentalUpdated = "Kiralama bilgileri güncellendi";
+        public static string RentalDeleted = "Kiralama bilgileri silindi";
+        public static string RentalNameInvalid = "Kiralayan ismi geçersiz";
+        public static string RentalListed = "Kiralıklar listelendi";
+        public static string CompanyNameInvalid = "Şirket ismi geçersiz";
+        public static string CustomerAdded = "Müşteri eklendi";
+        public static string CustomerUpdated = "Müşteri güncellendi";
+        public static string CustomerDeleted = "Müşteri silindi";
+        public static string CustomerListed = "Müşteri listelendi";
+        public static string UserAdded = "Kişi eklendi";
+        public static string UserUpdated = "Kişi güncellendi";
+        public static string UserDeleted = "Kişi silindi";
+        public static string UserListed = "Kişi listelendi";
+        public static string UserNameInvalid = "Kişi ismi geçersiz";
+        public static string RulesNameInvalid = "Kiralama şartları geçersiz";
+        public static string RulesPriceInvalid = "Kiralama fiyatı geçersiz";
+
 
     }
 }

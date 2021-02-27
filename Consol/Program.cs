@@ -1,4 +1,5 @@
-﻿using Business.Concrete;
+﻿using Business.Abstract;
+using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -39,7 +40,40 @@ namespace Consol
                 Console.WriteLine("Marka: {0} \t Brand Id: {1} ", brand.BrandName, brand.BrandId);
             }
 
+            Console.WriteLine(" ");
+            Console.WriteLine("\t ********* \t");
+            Console.WriteLine(" ");
+
+            UserManager userManager = new UserManager(new EfUserDal());
+            var result = userManager.GetAll();
+            if (result.Success == true)
+            {
+                foreach (var user in result.Data)
+                {   
+                    Console.WriteLine(user.FirstName + " " + user.LastName);
+                }
+            }
+
+            Console.WriteLine(" ");
+            Console.WriteLine("\t ********* \t");
+            Console.WriteLine(" ");
+
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            var results = rentalManager.Add(new Rental
+            { 
+                CustomerId = 1, 
+                RentDate = "03.01.2021", 
+                ReturnDate = "13.01.2021", 
+                CarId = 4, 
+                RentalId = 7
+            });
+            if (results.Success)
+            {
+                Console.WriteLine(results.Message);
+            }
+
             Console.ReadLine();
+            
         }
     }
 }

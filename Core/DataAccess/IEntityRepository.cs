@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Linq;
 using System.Text;
+using Core.Utilities;
 
 namespace Core
 {
-    public interface IEntityRepository<T> where T:class,IEntity,new()
-    {
-        List<T> GetAll(Expression<Func<T, bool>> filter = null);
-        T GetById(Expression<Func<T, bool>> filter);
-        void Add(T entity);
-        void Update(T entity);
-        void Delete(T entity);
-    }
+       public interface IEntityRepository<T> where T : class, IEntity, new()
+        {
+            List<T> GetAll(Expression<Func<T, bool>> filter = null);
+            T Get(Expression<Func<T, bool>> filter);
+            void Add(T entity);
+            void Update(T entity);
+            void Delete(T entity);
+        }
 }

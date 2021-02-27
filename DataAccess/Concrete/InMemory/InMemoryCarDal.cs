@@ -59,5 +59,10 @@ namespace DataAccess.Concrete.InMemory
             carToUpdate.DailyPrice = car.DailyPrice;
             carToUpdate.Descriptions = car.Descriptions;
         }
+
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
