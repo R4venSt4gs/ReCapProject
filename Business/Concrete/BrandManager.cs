@@ -13,14 +13,14 @@ namespace Business.Concrete
     public class BrandManager : IBrandService
     {
         IBrandDal _brandDal;
-        private Rentalcontext rentalContext;
+        private RentalContext rentalContext;
 
         public BrandManager(IBrandDal brandDal)
         {
             _brandDal = brandDal;
         }
 
-        public BrandManager(Rentalcontext rentalcontext)
+        public BrandManager(RentalContext rentalcontext)
         {
             this.rentalContext = rentalcontext;
         }

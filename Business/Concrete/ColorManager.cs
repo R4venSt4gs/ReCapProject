@@ -14,14 +14,14 @@ namespace Business.Concrete
     public class ColorManager : IColorService
     {
         IColorDal _colorDal;
-        private Rentalcontext rentalcontext;
+        private RentalContext rentalcontext;
 
         public ColorManager(IColorDal colorDal)
         {
             _colorDal = colorDal;
         }
 
-        public ColorManager(Rentalcontext rentalcontext)
+        public ColorManager(RentalContext rentalcontext)
         {
             this.rentalcontext = rentalcontext;
         }

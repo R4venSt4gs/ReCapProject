@@ -14,14 +14,14 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
-        private Rentalcontext rentalcontext;
+        private RentalContext rentalcontext;
 
         public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
         }
 
-        public CarManager(Rentalcontext rentalcontext)
+        public CarManager(RentalContext rentalcontext)
         {
             this.rentalcontext = rentalcontext;
         }
