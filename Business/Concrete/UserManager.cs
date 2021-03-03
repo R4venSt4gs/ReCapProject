@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Contants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -17,13 +19,10 @@ namespace Business.Concrete
         {
             _userDal = userdal;
         }
+        
+        [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user)
         {
-            if (user.FirstName.Length > 2)
-            {
-                _userDal.Add(user);
-                return new SuccessResult(Messages.UserNameInvalid);
-            }
             return new ErrorResult();
         }
 
