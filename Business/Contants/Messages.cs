@@ -38,7 +38,11 @@ namespace Business.Contants
         public static string UserNameInvalid = "Kişi ismi geçersiz";
         public static string RulesNameInvalid = "Kiralama şartları geçersiz";
         public static string RulesPriceInvalid = "Kiralama fiyatı geçersiz";
-
-
+        internal static string CarImageNotFound;
+        internal static string CarImageAdded;
+        internal static string CarImageUpdated;
+        internal static string CarImageDeleted;
+        internal static string CarImageCountExceeded;
+        internal static string CarImagesDeleted;
     }
 }
