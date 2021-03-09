@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Core.Entities.Concrete;
+using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Contants
@@ -38,11 +40,16 @@ namespace Business.Contants
         public static string UserNameInvalid = "Kişi ismi geçersiz";
         public static string RulesNameInvalid = "Kiralama şartları geçersiz";
         public static string RulesPriceInvalid = "Kiralama fiyatı geçersiz";
-        internal static string CarImageNotFound;
-        internal static string CarImageAdded;
-        internal static string CarImageUpdated;
-        internal static string CarImageDeleted;
-        internal static string CarImageCountExceeded;
-        internal static string CarImagesDeleted;
+        public static string CarImageNotFound;
+        public static string CarImageAdded;
+        public static string CarImageUpdated;
+        public static string CarImageDeleted;
+        public static string CarImageCountExceeded;
+        public static string CarImagesDeleted;
+        public static string AuthorizationDenied;
+        public static string SuccesfullLogin;
+        public static string PasswordFailed;
+        public static string AccessTokenCreated;
+        public static string CarImageCountOfCarError;
     }
 }

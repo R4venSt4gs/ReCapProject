@@ -10,5 +10,6 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfRentalDal : EfEntityRepositoryBase<Rental, RentalContext>, IRentalDal
     {
+        
     }
 }

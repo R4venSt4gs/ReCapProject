@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Contants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -13,23 +14,16 @@ namespace Business.Concrete
 {
     public class RentalManager : IRentalService
     {
-        IRentalDal _rentalDal;
+        private readonly IRentalDal _rentalDal;
 
         public RentalManager(IRentalDal rentalDal)
         {
             _rentalDal = rentalDal;
         }
 
-        [ValidationAspect(typeof(RentalValidator))]
-        public IResult Add(Rental rental)
+        public IDataResult<Rental> GetById(int id)
         {
-            _rentalDal.Add(rental);
-            return new SuccessResult(Messages.RentalAdded);
-        }
-
-        public IResult Delete(Rental rental)
-        {
-            return new SuccessResult(Messages.RentalDeleted);
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentalId == id));
         }
 
         public IDataResult<List<Rental>> GetAll()
@@ -37,14 +31,35 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
         }
 
-        public IDataResult<Rental> GetByRentalId(int rentalId)
+        [SecuredOperation("rental.add,moderator,admin")]
+        public IResult Add(Rental customer)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentalId == rentalId));
+            var result = CheckReturnDate(customer.CarId);
+            if (!result.Success) return new ErrorResult(result.Message);
+
+            _rentalDal.Add(customer);
+            return new SuccessResult(Messages.RentalAdded);
         }
 
-        public IResult Update(Rental rental)
+        [SecuredOperation("rental.update,moderator,admin")]
+        public IResult Update(Rental customer)
         {
+            _rentalDal.Update(customer);
             return new SuccessResult(Messages.RentalUpdated);
+        }
+
+        [SecuredOperation("rental.delete,moderator,admin")]
+        public IResult Delete(Rental customer)
+        {
+            _rentalDal.Delete(customer);
+            return new SuccessResult(Messages.RentalDeleted);
+        }
+
+        public IDataResult<Rental> CheckReturnDate(int carId)
+        {
+            var result = _rentalDal.GetAll(x => x.CarId == carId && x.ReturnDate == null);
+            if (result.Count > 0) return new ErrorDataResult<Rental>(Messages.RentalUpdated);
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.CarId == carId));
         }
     }
 }

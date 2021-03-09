@@ -6,7 +6,7 @@ namespace Core.Utilities
 {
     public class Result : IResult
     {
-        public Result(bool success, string message) : this (success)
+        public Result(bool success, string message) : this(success)
         {
             Message = message;
         }

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Contants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -15,44 +16,42 @@ namespace Business.Concrete
 {
     public class ColorManager : IColorService
     {
-        IColorDal _colorDal;
-        private RentalContext rentalcontext;
+        private readonly IColorDal _colorDal;
 
         public ColorManager(IColorDal colorDal)
         {
             _colorDal = colorDal;
         }
 
-        public ColorManager(RentalContext rentalcontext)
+        public IDataResult<Color> GetById(int id)
         {
-            this.rentalcontext = rentalcontext;
+            return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == id));
         }
 
-        [ValidationAspect(typeof(ColorValidator))]
+        public IDataResult<List<Color>> GetAll()
+        {
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll());
+        }
+
+        [SecuredOperation("color.add,moderator,admin")]
         public IResult Add(Color color)
         {
             _colorDal.Add(color);
             return new SuccessResult(Messages.ColorAdded);
         }
 
-        public IResult Delete(Color color)
-        {
-            return new SuccessResult(Messages.ColorDeleted);
-        }
-
-        public IDataResult<List<Color>> GetAll()
-        {
-            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.ColorListed);
-        }
-
-        public IDataResult<Color> GetById(int colorId)
-        {
-            return new SuccessDataResult<Color>(_colorDal.Get(b => b.ColorId == colorId));
-        }
-
+        [SecuredOperation("color.update,moderator,admin")]
         public IResult Update(Color color)
         {
+            _colorDal.Update(color);
             return new SuccessResult(Messages.ColorUpdated);
+        }
+
+        [SecuredOperation("color.delete,moderator,admin")]
+        public IResult Delete(Color color)
+        {
+            _colorDal.Delete(color);
+            return new SuccessResult(Messages.ColorDeleted);
         }
     }
 }
